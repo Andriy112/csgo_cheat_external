@@ -20,7 +20,7 @@ player* get_next_entity_obj(int index)
 VOID put_wallhack(DWORD32* glwobj, DWORD32* glwInd, struct colors const* c)
 {
 	bool enable = true;
-	static float a = 0.5f;
+	float a = 0.5f;
 	assert(WriteProcessMemory(setup.proc, (LPVOID)(*glwobj + *glwInd * 0x38 + 0x8), &c->r, sizeof(float), 0));
 	assert(WriteProcessMemory(setup.proc, (LPVOID)(*glwobj + *glwInd * 0x38 + 0xC), &c->g, sizeof(float), 0));
 	assert(WriteProcessMemory(setup.proc, (LPVOID)(*glwobj + *glwInd * 0x38 + 0x10), &c->b, sizeof(float), 0));
