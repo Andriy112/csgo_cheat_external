@@ -11,9 +11,7 @@
 
 int main()
 {
-	//player ent;
-	//ReadHealth(getprocId(L"csgo.exe"),&ent);
-	//printf("%d \n",ent.health);
+	
 	struct colors enemy = {  1.f,0.f,0.7f };
 
 	init_default_cheat_opts();
