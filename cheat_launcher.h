@@ -1,4 +1,3 @@
-//#include "player.h"
 
 struct csgo_setup
 {
