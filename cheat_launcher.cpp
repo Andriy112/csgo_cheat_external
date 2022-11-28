@@ -5,6 +5,7 @@
 #include <stdbool.h>
 #include "player.h"
 #include "cheat_launcher.h"
+
 int start(struct colors* pcolors)
 {
 	player* me = get_next_entity_obj(0);
@@ -18,12 +19,12 @@ int start(struct colors* pcolors)
 		for (size_t i = 1; i <= 64; i++)
 		{
 			__player = get_next_entity_obj(i);
-
 			//returns iterated player's glowIndex
 			ReadProcessMemory(setup.proc, (LPCVOID)(((DWORD32)__player->address) + m_iGlowIndex), &glowIndex, 4, 0);
 			if (__player->teamNum != me->teamNum)
 			{
 				put_wallhack(&glowObjManager, &glowIndex, pcolors);
+				//if local player's crosshair on enemy , then you must shot
 				if (me->on_enemy())
 				{
 					me->fire();
@@ -34,7 +35,6 @@ int start(struct colors* pcolors)
 			else
 			{
 				delete __player;
-				//try to remove it
 				continue;
 			}
 		}
@@ -89,13 +89,10 @@ int getprocId(_In_ wchar_t const* procname)
 					return proc_data.th32ProcessID;
 				}
 			}
-
 		}
 	}
 	else
 	{
 		abort();
 	}
-
-	return 0;
 }
