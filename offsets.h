@@ -1,7 +1,7 @@
 #include "windows.h"
 #define CLIENT_DLL_NAME L"client.dll"
 #define ENGINE_DLL_NAME L"engine.dll"
-EXTERN_C_START
+
 DWORD32 const dwClientState_State = 0x108;
 DWORD32 const dwHealth = 0x100;
 DWORD32 const dwClientState = 0x59F194;
@@ -18,4 +18,3 @@ DWORD32 const  dwForceAttack = 0x322AC7C;
 DWORD32 const m_iCrosshairId = 0x11838;
 DWORD32 const m_vecOrigin = 0x138;
 DWORD32 const m_iFOV = 0x31F4;
-EXTERN_C_END
