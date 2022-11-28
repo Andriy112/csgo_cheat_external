@@ -19,7 +19,7 @@ public:
 	 because i cannot receive id of player in official matches.*/
 	virtual bool on_enemy();
 };
-EXTERN_C_START
+
 player* get_next_entity_obj(int index);
 void put_wallhack(DWORD32* glwobj, DWORD32* glwInd, struct colors const* c);
-EXTERN_C_END
+
