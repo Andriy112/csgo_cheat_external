@@ -3,11 +3,6 @@
 #include <assert.h>
 #include "cheat_launcher.h"
 #include "player.h"
-#include "offsets.h"
-
-
-
-
 
 int main()
 {
