@@ -5,9 +5,10 @@
 #include <stdbool.h>
 #include "player.h"
 #include "cheat_launcher.h"
+
 int start(struct colors* pcolors)
 {
-	boneMatrix_t* head =(boneMatrix_t*)malloc(sizeof(boneMatrix_t));
+	boneMatrix_t* head =nullptr;
 	vec xy;
 	player* me = get_next_entity_obj(0);
 	DWORD32 glowObjManager, glowIndex;
@@ -27,7 +28,7 @@ int start(struct colors* pcolors)
 			{
 				if (__player->address)
 				{
-					boneMatrix_t* head = get_head(__player);
+					head = get_head(__player);
 					xy.X = *head->x;
 					xy.Y = *head->y;
 					xy.Z = *head->z;
