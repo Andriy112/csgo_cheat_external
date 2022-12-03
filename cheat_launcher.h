@@ -11,10 +11,5 @@ struct csgo_setup
  int start(struct colors* pcolors);
  int getprocId(_In_ wchar_t const* procname);
  BYTE* _getModule(const wchar_t* moduleName, int PID);
- class display 
- {
- public:
-	 unsigned height, width;
-	 static display current_display();
- };
+ 
 

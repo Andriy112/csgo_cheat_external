@@ -4,10 +4,11 @@
 #include "offsets.h"
 #include <stdio.h>
 #include "cheat_launcher.h"
+#include "display.h"
 player* get_next_entity_obj(int index)
 {
 	player* p = new player;
-	int players_count = 0;
+	int players_count = 0; 
 	int entity_address = 0, localplayer_hp = 0, team_num = 0;
 	assert(ReadProcessMemory(setup.proc, (LPCVOID)(setup.Module + dwEntityList + index * 0x10), &entity_address, 4, 0));
 	ReadProcessMemory(setup.proc, (LPCVOID)(entity_address + dwHealth), &localplayer_hp, 4, 0);
@@ -41,7 +42,7 @@ bool player::fire(int count)
 	}
 	Sleep(20);
 	assert(WriteProcessMemory(setup.proc, (LPVOID)((DWORD32)setup.Module + dwForceAttack), &fired, 4, 0));
-	Sleep(60);
+	Sleep(50);
 	return true;
 }
 boneMatrix_t* get_head(player* pplayer) 
@@ -89,4 +90,12 @@ int delete_bonematrix(boneMatrix_t *bone)
 	delete bone->z;
 	delete bone;
 	return 0;
+}
+void read_glwIndex(player * pplayer, UINT* glowIndex)
+{
+	ReadProcessMemory(setup.proc, (LPCVOID)(((DWORD32)pplayer->address) + m_iGlowIndex), glowIndex, 4, 0);
+}
+void read_glw_obj_manager(UINT* glowObjManager)
+{
+	assert(ReadProcessMemory(setup.proc, (LPCVOID)(setup.Module + dwGlowObjectManager), glowObjManager, 4, 0));
 }

@@ -5,16 +5,13 @@
 #include <stdbool.h>
 #include "player.h"
 #include "cheat_launcher.h"
-
 int start(struct colors* pcolors)
 {
-	boneMatrix_t* head =nullptr;
+	boneMatrix_t* head = nullptr;
 	vec xy;
 	player* me = get_next_entity_obj(0);
-	DWORD32 glowObjManager, glowIndex;
-#pragma region trying to read glowObjectManager
-	assert(ReadProcessMemory(setup.proc, (LPCVOID)(setup.Module + dwGlowObjectManager), &glowObjManager, 4, 0));
-#pragma endregion
+	DWORD32 glowObjManager=0, glowIndex=0;
+	read_glw_obj_manager(&glowObjManager);
 	player* __player;
 	for (;;)
 	{
@@ -22,8 +19,8 @@ int start(struct colors* pcolors)
 		{
 			__player = get_next_entity_obj(i);
 
-			//returns iterated player's glowIndex
-			ReadProcessMemory(setup.proc, (LPCVOID)(((DWORD32)__player->address) + m_iGlowIndex), &glowIndex, 4, 0);
+			
+			read_glwIndex(__player,&glowIndex);
 			if (__player->teamNum != me->teamNum)
 			{
 				if (__player->address)
@@ -111,17 +108,4 @@ int getprocId(_In_ wchar_t const* procname)
 	}
 
 	return 0;
-}
-display display::current_display() 
-{
-	DEVMODE devMode;
-	DISPLAY_DEVICE displayDevice = { .cb = sizeof(displayDevice) };
-	ZeroMemory(&devMode, sizeof(DEVMODE));
-	devMode.dmSize = sizeof(DEVMODE);
-
-	assert(EnumDisplayDevices(NULL, 0, &displayDevice, EDD_GET_DEVICE_INTERFACE_NAME));
-
-	assert(EnumDisplaySettings(displayDevice.DeviceName, ENUM_CURRENT_SETTINGS, &devMode));
-
-	return display{.height =devMode.dmPelsHeight,.width = devMode.dmPelsWidth};
 }

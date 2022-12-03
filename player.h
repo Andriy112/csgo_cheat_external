@@ -29,3 +29,6 @@ player* get_next_entity_obj(int index);
 void put_wallhack(DWORD32* glwobj, DWORD32* glwInd, struct colors const* c);
 boneMatrix_t* get_head(player *pplayer);
 int delete_bonematrix(boneMatrix_t*);
+void read_glwIndex(player * , DWORD32* );
+void read_glw_obj_manager(UINT*);
+
